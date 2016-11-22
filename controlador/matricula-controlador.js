@@ -16,20 +16,21 @@ exports.consultarEstudianteMatriculado = function(id, done) {
 			.get()
 			.query(
 					// query realizado con ayuda de estudiante Sergio Muñoz
-					'SELECT nombres, apellidos FROM appnotas_estudiantes INNER JOIN appnotas_matricula ON appnotas_estudiantes.id_estudiante = appnotas_matricula.id_estudiante WHERE id_curso = ?',
+					'SELECT * FROM appnotas_estudiantes INNER JOIN appnotas_matricula ON appnotas_estudiantes.id_estudiante = appnotas_matricula.id_estudiante WHERE id_curso = ?',
 					id, function(err, rows) {
 						if (err)
 							return done(err);
 						done(null, rows);
 					});
 };
+
 // consultar cursos matriculados por un estudiante
 exports.consultaCursoEstudiante = function(id, done) {
 	db
 			.get()
 			.query(
 					// query realizado con ayuda de estudiante Sergio Muñoz
-					'SELECT nombre FROM appnotas_cursos INNER JOIN appnotas_matricula ON appnotas_cursos.id_curso = appnotas_matricula.id_curso WHERE id_estudiante = ?',
+					'SELECT * FROM appnotas_cursos INNER JOIN appnotas_matricula ON appnotas_cursos.id_curso = appnotas_matricula.id_curso WHERE id_estudiante = ?',
 					id, function(err, rows) {
 						if (err)
 							return done(err);

@@ -20,7 +20,7 @@ module.exports = (function() {
 		})
 	})
 
-	// consultar estudiantes matriculados
+	// consultar estudiantes matriculados en un curso
 	enrutador.route('/servicios/cursos/:id_curso/estudiantes').get(
 			function(req, res, next) {
 				controlador.consultarEstudianteMatriculado(req.params.id_curso,

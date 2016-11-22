@@ -1,7 +1,11 @@
 <link rel="import" href="https://polygit2.appspot.com/components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
 
 <dom-module id="component-curso">
     <template>
+       
+       
         <style>
             :host{
                 display:block;
@@ -13,13 +17,9 @@
             h2{
               display:inline;  
             }
-            #nombreEstudiantes{
-             background-color: red;
-                float:left;
-            }
-
-
         </style>
+        
+        
         <iron-ajax
                         auto
                         id="ajaxCurso"
@@ -30,31 +30,48 @@
                         debounce-duration="400"
                         loading="{{cargando}}"
                          content-type="application/json">
-</iron-ajax>
+        </iron-ajax>
  
-       
 <paper-card heading="Curso: {{nombre}} " class="disable-swipe" >
     <h2>Periodo:</h2>
     <h3>{{periodo}}</h3>
 <template is="dom-repeat" items="{{estudiantes}}" id="contenCur" as="i">
                               <!-- se meten los elementos en un a para poder linkear, lo que esta en el href es la direcion a linkear, el 123 es variable que se define en app route, value: valor que se le da al elemento-->
-
-                               <a class="paper-item-link" href="#/curso/{{idCurso}}/{{nombre}}/{{periodo}}" tabindex="-1"><paper-item id="nombreEstudiantes" on-tap="cargar" value="{{i}}">{{i.nombres}} {{i.apellidos}}
+                               <a class="paper-item-link" href="#/estudiantes/{{idEstudiante}}" tabindex="-1"><paper-item id="nombreEstudiantes" on-tap="cargarEstudiantes" value="{{i}}">{{i.nombres}} {{i.apellidos}}.
                                 </paper-item>
-                                </a>
+                                </a>                                
+                                <paper-item>Nota: {{i.nota_obtenida}}, <a href="">modificar</a></paper-item>
+                                
+<app-router>
+<!--         enruta a direcion determinada por not y variable-->
 
 
+<app-route path="/estudiantes/:id_estudiante"import="/component-app/component-estudiante.html"></app-route>
+
+</app-router>
 </template>
-
+<br><br><br><br>La nota promedio es:
+ <iron-meta key="promedio" value=" ">promedio.value</iron-meta>
 
  
       </paper-card>
     </template>
     <script>
         Polymer({
-            is: 'component-curso',            
-            properties: {             
-            }          
+            is: 'component-curso', 
+            
+            properties: {   
+                idEstudiante:{
+                    value:"",
+                },
+            },
+            cargarEstudiantes:function( e ){
+    //target: lo que se presiono, value: lo que me tira
+    this.idEstudiante=e.target.value.id_estudiante;
+   
+
+ 
+}
         });
         
     </script>
