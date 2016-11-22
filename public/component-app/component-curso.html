@@ -1,0 +1,61 @@
+<link rel="import" href="https://polygit2.appspot.com/components/polymer/polymer.html">
+
+<dom-module id="component-curso">
+    <template>
+        <style>
+            :host{
+                display:block;
+            }
+            paper-card{
+                width:1000px;
+                padding:1em;
+                }
+            h2{
+              display:inline;  
+            }
+            #nombreEstudiantes{
+             background-color: red;
+                float:left;
+            }
+
+
+        </style>
+        <iron-ajax
+                        auto
+                        id="ajaxCurso"
+                        url="http://localhost:3000/servicios/cursos/{{idCurso}}/estudiantes"
+                        handle-as="json"
+                        on-response="handleResponse"
+                        last-response="{{estudiantes}}"
+                        debounce-duration="400"
+                        loading="{{cargando}}"
+                         content-type="application/json">
+</iron-ajax>
+ 
+       
+<paper-card heading="Curso: {{nombre}} " class="disable-swipe" >
+    <h2>Periodo:</h2>
+    <h3>{{periodo}}</h3>
+<template is="dom-repeat" items="{{estudiantes}}" id="contenCur" as="i">
+                              <!-- se meten los elementos en un a para poder linkear, lo que esta en el href es la direcion a linkear, el 123 es variable que se define en app route, value: valor que se le da al elemento-->
+
+                               <a class="paper-item-link" href="#/curso/{{idCurso}}/{{nombre}}/{{periodo}}" tabindex="-1"><paper-item id="nombreEstudiantes" on-tap="cargar" value="{{i}}">{{i.nombres}} {{i.apellidos}}
+                                </paper-item>
+                                </a>
+
+
+</template>
+
+
+ 
+      </paper-card>
+    </template>
+    <script>
+        Polymer({
+            is: 'component-curso',            
+            properties: {             
+            }          
+        });
+        
+    </script>
+</dom-module>

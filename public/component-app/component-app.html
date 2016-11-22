@@ -1,0 +1,137 @@
+<link rel="import" href="https://polygit2.appspot.com/components/polymer/polymer.html">
+<link rel="import" href="https://polygit2.appspot.com/components/paper-button/paper-button.html">
+<link rel="import" href="https://polygit2.appspot.com/components/paper-card/paper-card.html">
+<link rel="import" href="https://polygit2.appspot.com/components/paper-input/paper-input.html">
+<link rel="import" href="https://polygit2.appspot.com/components/iron-ajax/iron-ajax.html">
+<link rel="import" href="https://polygit2.appspot.com/components/paper-item/paper-item.html">
+//import para enrutador a otras direcciones
+<link rel="import" href="/component-app/bower_components/app-router/app-router.html">
+<!--
+`component-app`
+
+
+@demo demo/index.html 
+-->
+
+<dom-module id="component-app">
+<template>
+<style>
+:host {
+display: block;
+  text-align:center;
+}
+paper-card {
+        text-align: center;
+        width: 500px;
+        padding: 1em;
+    }
+paper-button{
+    background-color:var(--paper-red-100);
+}
+#nombreCursos{
+    --paper-item-focused:{
+    background:var(--paper-blue-100);
+    font-weight: bold;    
+    }
+    --paper-item-focused-before:{
+        opacity:0;
+    }
+}
+
+</style>
+<!--          ajax llama el back,
+  url es la direccion de donde se sacara la info
+  handle as es que tipo de formato maneja esa info
+  on-response:status del request
+  last-response: saca el resultado del request que se hizo-->
+   <iron-ajax
+
+                        id="ajaxIndex"
+                        url="http://localhost:3000/servicios/cursos/periodo/{{periodo}}"
+                        handle-as="json"
+                        on-response="handleResponse"
+                        last-response="{{cursos}}"
+                        debounce-duration="400"
+                        loading="{{cargando}}"
+                         content-type="application/json">
+</iron-ajax>
+<div hidden="{{!vis}}">
+
+<paper-card heading="Consultar Materias por Periodo" class="disable-swipe" >
+<paper-input label="ingrese periodo" id="ingresarPeriodo"></paper-input>
+<paper-button raised on-tap="botonConsultar">Consultar</paper-button>
+<paper-button raised on-tap="matricular">Matricular</paper-button>
+<!--          dom-repeat repite los datos que se traen
+items: es los datos que se llamo anteriormente en el last-response
+as: vuelve los resultados como i-->
+<template is="dom-repeat" items="{{cursos}}" id="contenCur" as="i">
+                              <!-- se meten los elementos en un a para poder linkear, lo que esta en el href es la direcion a linkear, el 123 es variable que se define en app route, value: valor que se le da al elemento-->
+
+                               <a class="paper-item-link" href="#/curso/{{idCurso}}/{{nombre}}/{{periodo}}" tabindex="-1"><paper-item id="nombreCursos" on-tap="ocultar" value="{{i}}">{{i.nombre}}
+                                </paper-item>
+                                </a>
+
+
+</template>
+
+</paper-card>
+
+</div>
+
+<app-router>
+<!--         enruta a direcion determinada por not y variable-->
+
+
+<app-route path="/curso/:idCurso/:nombre/:periodo"import="/component-app/component-curso.html"></app-route>
+
+</app-router>
+
+</template>
+
+<script>
+
+Polymer({
+
+is: 'component-app',
+
+properties: {
+periodo: {
+  type: String,
+  value: "",
+},
+  vis:{
+
+      value:true,
+  },
+  //propiedad que determina el id del curso, esta vacio por que YOLO
+  idCurso:{
+      value:"",
+  },
+    nombre:{
+        value:"",
+    },
+    },
+//saca el request del boton(matricular) y llama lo que se escribio en el input(#)
+botonConsultar:function(){
+    this.periodo=this.$$("#ingresarPeriodo").value;
+
+    //llama al ajax
+this.$.ajaxIndex.generateRequest();
+
+},
+//funcion de ocultar, cuando se presiona el ocultar llama al e
+ocultar:function( e ){
+    //target: lo que se presiono, value: lo que me tira
+    this.idCurso=e.target.value.id_curso;
+    this.nombre=e.target.value.nombre;
+
+    //vis es un booleano que desactiva la visibilidad del component
+    if (this.vis) {
+        this.vis = false;
+    }  
+}
+
+    
+});
+</script>
+</dom-module>
