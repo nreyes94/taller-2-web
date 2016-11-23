@@ -27,13 +27,16 @@
 <paper-card heading="Estudiante: {{nombres}} {{apellidos}}" class="disable-swipe">
         <h2>Semestre:</h2>
         <h3>{{semestre}}</h3>
-            <template is="dom-repeat" items="{{cursos}}" id="contenStudents" as="i">
-                  <a class="paper-item" href="#/curso/{{idCurso}}/{{nombre}}/{{periodo}}"  tabindex="-1"><paper-item id="nombreCursos" on-tap="holi" value="{{i}}">Nombre:{{i.nombre}},id curso:{{i.id_curso}}, periodo: {{i.periodo}}
-                  </paper-item>
-                </a>
-             
-              <paper-item>Nota: {{i.nota_obtenida}},  <a>(Modificar)</a></paper-item> 
-            
+        <template is="dom-repeat" items="{{cursos}}" id="contenStudents" as="i">
+            <paper-item>
+                 <a class="paper-item-link" href="#/curso/{{i.id_curso}}/{{i.nombre}}/{{i.periodo}}" tabindex="-1">
+                     {{i.nombre}}
+                 </a>
+            </paper-item>
+            <paper-item>
+                 <a class="paper-item-link" href="">Nota: {{i.nota_obtenida}}
+                 </a>
+            </paper-item>
             </template>
          
 </paper-card>  
@@ -41,8 +44,10 @@
 <!--         enruta a direcion determinada por not y variable-->
 
 
-<app-route path="/cursos/:id_curso/:nombre/:periodo"import="/component-app/component-curso.html"></app-route>
-
+<app-route path="/cursos/:id_curso/:nombre/:periodo"import="/component-app/component-curso.html"
+    
+></app-route>
+<app-route path="/"></app-route>
 </app-router>
   </template>
 

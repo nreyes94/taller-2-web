@@ -50,7 +50,7 @@ paper-button{
                         url="http://localhost:3000/servicios/cursos/periodo/{{periodo}}"
                         handle-as="json"
                         on-response="handleResponse"
-                        last-response="{{cursos}}"
+                        last-response="{{resultado}}"
                         debounce-duration="400"
                         loading="{{cargando}}"
                          content-type="application/json">
@@ -64,7 +64,7 @@ paper-button{
 <!--          dom-repeat repite los datos que se traen
 items: es los datos que se llamo anteriormente en el last-response
 as: vuelve los resultados como i-->
-<template is="dom-repeat" items="{{cursos}}" id="contenCur" as="i">
+<template is="dom-repeat" items="{{resultado}}" id="contenCur" as="i">
                               <!-- se meten los elementos en un a para poder linkear, lo que esta en el href es la direcion a linkear, el 123 es variable que se define en app route, value: valor que se le da al elemento-->
 
                                <a class="paper-item-link" href="#/curso/{{idCurso}}/{{nombre}}/{{periodo}}" tabindex="-1"><paper-item id="nombreCursos" on-tap="ocultar" value="{{i}}">{{i.nombre}}
