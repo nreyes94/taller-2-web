@@ -16,7 +16,7 @@
             <iron-ajax
                        auto
                         id="ajaxEstudiantes"
-                        url="http://localhost:3000/servicios/estudiantes/{{id_estuiante}}/cursos"
+                        url="http://localhost:3000/servicios/estudiantes/{{id_estudiante}}/cursos"
                         handle-as="json"
                         on-response="handleResponse"
                         last-response="{{cursos}}"
@@ -27,6 +27,13 @@
 <paper-card heading="Estudiante: {{nombres}} {{apellidos}}" class="disable-swipe">
         <h2>Semestre:</h2>
         <h3>{{semestre}}</h3>
+            <template is="dom-repeat" items="{{cursos}}" id="contenStudents" as="i">
+                                  <!-- se meten los elementos en un a para poder linkear, lo que esta en el href es la direcion a linkear, el 123 es variable que se define en app route, value: valor que se le da al elemento-->
+                                   <paper-item id="nombreCursos" value="{{i}}">{{i.nombre}} 
+                                    </paper-item>
+                                   <paper-item>Nota: {{i.nota_obtenida}} <a href="">(Modificar)</a></paper-item>
+                                                                    
+                                </template>
          
 </paper-card>  
   </template>
