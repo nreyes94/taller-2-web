@@ -1,0 +1,48 @@
+<link rel="import" href="https://polygit2.appspot.com/components/polymer/polymer.html">
+
+ 
+
+ 
+ <dom-module id="component-estudiante">
+  <template>
+    <style>
+      :host {
+        display: block;
+          text-align:center;
+      }
+        
+        
+    </style>
+            <iron-ajax
+                       auto
+                        id="ajaxEstudiantes"
+                        url="http://localhost:3000/servicios/estudiantes/{{id_estuiante}}/cursos"
+                        handle-as="json"
+                        on-response="handleResponse"
+                        last-response="{{cursos}}"
+                        debounce-duration="400"
+                        loading="{{cargando}}"
+                         content-type="application/json">
+        </iron-ajax>       
+<paper-card heading="Estudiante: {{nombres}} {{apellidos}}" class="disable-swipe">
+        <h2>Semestre:</h2>
+        <h3>{{semestre}}</h3>
+         
+</paper-card>  
+  </template>
+
+  <script>
+    Polymer({
+
+      is: 'component-estudiante',
+
+      properties: {
+     
+          
+      },
+               
+        
+    });
+
+  </script>
+</dom-module>
