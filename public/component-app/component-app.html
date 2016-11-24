@@ -2,11 +2,15 @@
 <link rel="import" href="https://polygit2.appspot.com/components/paper-button/paper-button.html">
 <link rel="import" href="https://polygit2.appspot.com/components/paper-card/paper-card.html">
 <link rel="import" href="https://polygit2.appspot.com/components/paper-input/paper-input.html">
+<link rel="import" href="https://polygit2.appspot.com/components/paper-dropdown-menu/paper-dropdown-menu.html">
+<link rel="import" href="https://polygit2.appspot.com/components/paper-listbox/paper-listbox.html">
 <link rel="import" href="https://polygit2.appspot.com/components/iron-ajax/iron-ajax.html">
 <link rel="import" href="https://polygit2.appspot.com/components/paper-item/paper-item.html">
 <link rel="import" href="https://polygit2.appspot.com/components/iron-input/iron-input.html">
 <link rel="import" href="https://polygit2.appspot.com/components/iron-icons/iron-icons.html">
 <link rel="import" href="https://polygit2.appspot.com/components/iron-icon/iron-icon.html">
+<link rel="import" href="https://polygit2.appspot.com/components/iron-selector/iron-selector.html">
+
 
 //import para enrutador a otras direcciones
 <link rel="import" href="/component-app/bower_components/app-router/app-router.html">
@@ -64,7 +68,9 @@ paper-button{
 <paper-card heading="Consultar Materias por Periodo" class="disable-swipe" >
 <paper-input label="ingrese periodo" id="ingresarPeriodo"></paper-input>
 <paper-button raised on-tap="botonConsultar">Consultar</paper-button>
+<a class="paper-button-link" href="#/matricula">
 <paper-button raised on-tap="matricular">Matricular</paper-button>
+</a>
 <!--          dom-repeat repite los datos que se traen
 items: es los datos que se llamo anteriormente en el last-response
 as: vuelve los resultados como i-->
@@ -87,6 +93,8 @@ as: vuelve los resultados como i-->
 
 
 <app-route path="/curso/:idCurso/:nombre/:periodo"import="/component-app/component-curso.html"></app-route>
+<app-route path="/matricula"import="/component-app/component-matricula.html"></app-route>
+
 
 </app-router>
 
@@ -133,7 +141,12 @@ ocultar:function( e ){
     if (this.vis) {
         this.vis = false;
     }  
-}
+},
+    matricular:function(r){
+        if(this.vis){
+            this.vis=false;
+        }
+    }
 
     
 });

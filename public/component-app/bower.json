@@ -6,7 +6,10 @@
     "app-router": "^2.7.1",
     "iron-input": "^1.0.10",
     "iron-icon": "^1.0.12",
-    "iron-icons": "^1.2.0"
+    "iron-icons": "^1.2.0",
+    "paper-dropdown-menu": "^1.4.2",
+    "paper-listbox": "^1.1.2",
+    "iron-selector": "^1.5.2"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",

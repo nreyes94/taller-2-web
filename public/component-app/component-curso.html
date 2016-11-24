@@ -40,7 +40,7 @@
                                     </paper-item>
                                     </a>                                
                                     <paper-item>
-                                      <a class="paper-item-link" href="" on-tap="">Nota: {{i.nota_obtenida}} 
+                                      <a class="paper-item-link" href="#/nota/{{i.id_estudiante}}/{{i.nombres}}/{{i.apellidos}}/{{i.id_curso}}/{{nombre}}/{{i.nota_obtenida}}" on-tap="ocultaCurso2">Nota: {{i.nota_obtenida}} 
                  </a></paper-item>
 
 
@@ -59,6 +59,7 @@
 
 
 <app-route path="/estudiantes/:id_estudiante/:nombres/:apellidos/:semestre"import="/component-app/component-estudiante.html"></app-route>
+<app-route path="/nota/:id_estudiante/:nombres/:apellidos/:id_curso/:nombre/:nota_obtenida"import="/component-app/component-nota.html"></app-route>
 
 <app-route path=""></app-route>
 
@@ -100,7 +101,12 @@
     } 
     
        
-    }
+    },
+            ocultaCurso2:function(r){
+            if(this.visCurso){
+            this.visCurso=false;
+        }
+        }
         });
         
     </script>
