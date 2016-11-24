@@ -1,6 +1,5 @@
 <link rel="import" href="https://polygit2.appspot.com/components/polymer/polymer.html">
-<link rel="import" href="../../bower_components/iron-icons/iron-icons.html">
-<link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
+
 
 <dom-module id="component-curso">
     <template>
@@ -40,7 +39,9 @@
                                    <a class="paper-item" href="#/estudiantes/{{idEstudiante}}/{{nombres}}/{{apellidos}}/{{semestre}}"  tabindex="-1"><paper-item id="nombreEstudiantes" on-tap="ocultaCurso" value="{{i}}">{{i.nombres}} {{i.apellidos}}.
                                     </paper-item>
                                     </a>                                
-                                    <paper-item>Nota: {{i.nota_obtenida}}, <a href="">(Modificar)</a></paper-item>
+                                    <paper-item>
+                                      <a class="paper-item-link" href="" on-tap="">Nota: {{i.nota_obtenida}} 
+                 </a></paper-item>
 
 
     </template>
@@ -58,6 +59,8 @@
 
 
 <app-route path="/estudiantes/:id_estudiante/:nombres/:apellidos/:semestre"import="/component-app/component-estudiante.html"></app-route>
+
+<app-route path=""></app-route>
 
 </app-router>
     </template>

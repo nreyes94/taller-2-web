@@ -23,7 +23,8 @@
                         debounce-duration="400"
                         loading="{{cargando}}"
                          content-type="application/json">
-        </iron-ajax>       
+        </iron-ajax>
+        <div hidden="{{!visEstudiante}}">       
 <paper-card heading="Estudiante: {{nombres}} {{apellidos}}" class="disable-swipe">
         <h2>Semestre:</h2>
         <h3>{{semestre}}</h3>
@@ -34,12 +35,13 @@
                  </a>
             </paper-item>
             <paper-item>
-                 <a class="paper-item-link" href="">Nota: {{i.nota_obtenida}}
+                 <a class="paper-item-link" href="#/nota/{{i.id_estudiante}}/{{nombres}}/{{apellidos}}/{{i.id_curso}}/{{i.nombre}}/{{i.nota_obtenida}}" on-tap="ocultaEstudiante">Nota: {{i.nota_obtenida}} 
                  </a>
             </paper-item>
             </template>
          
-</paper-card>  
+</paper-card>
+      </div>  
        <app-router>
 <!--         enruta a direcion determinada por not y variable-->
 
@@ -47,7 +49,7 @@
 <app-route path="/cursos/:id_curso/:nombre/:periodo"import="/component-app/component-curso.html"
     
 ></app-route>
-<app-route path="/"></app-route>
+<app-route path="/nota/:id_estudiante/:nombres/:apellidos/:id_curso/:nombre/:nota_obtenida" import="/component-app/component-nota.html"></app-route>
 </app-router>
   </template>
 
@@ -57,23 +59,21 @@
       is: 'component-estudiante',
 
       properties: {
-        idCurso:{
-            value:"",
-        },
-          nombre:{
-              value:"",
-          },
-          periodo:{
-              value:"",
-          }
+
+          visEstudiante:{
+                    value:true,
+                },
+     
       },
         //funciones
-        holi:function(e){
-            this.idCurso=e.target.value.id_curso;
-            this.nombre=e.target.value.nombre;
-            this.periodo=e.target.value.periodo;
-            
+
+        ocultaEstudiante:function(e){
+            if(this.visEstudiante){
+                this.visEstudiante=false;
+            }
+            console.log("oculto esta wea");
         }
+        
              
     });
 

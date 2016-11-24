@@ -37,6 +37,7 @@ exports.consultaCursoEstudiante = function(id, done) {
 						done(null, rows);
 					});
 };
+//arreglar el query y agregar lo de avg
 // matricular un estudiante en un curso
 exports.matricularEstudiante = function(id_curso, id_estudiante, done) {
 	var values = {

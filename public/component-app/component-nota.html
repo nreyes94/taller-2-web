@@ -1,15 +1,48 @@
-<dom-module id="component-nota">
+<link rel="import" href="https://polygit2.appspot.com/components/polymer/polymer.html">
+ <link rel="import" href="https://polygit2.appspot.com/components/iron-input/iron-input.html">
+
+
+ 
+
+ <dom-module id="component-nota">
   <template>
     <style>
       :host {
         display: block;
           text-align:center;
       }
+        paper-card{
+            width:600px;
+            padding: 1em;
+        }
         
         
     </style>
-           
 
+<paper-card heading="Modificando nota en la materia {{nombre}}">
+    
+    <h2>Estudiante:{{id_estudiante}}, {{nombres}} {{apellidos}}. Curso: {{id_curso}},{{nombre}},Nota actual: {{nota_obtenida}}</h2>
+    <paper-input label="Ingrese nueva nota" id="ingresarNota" value="{{nota_obtenida}}"></paper-input>
+    <paper-button raised on-tap="actualizar">Actualizar</paper-button>
+
+
+</paper-card>   
+     <iron-ajax
+
+                        id="ajaxNota"
+                        url="http://localhost:3000/servicios/matricula/"
+                        method="PUT"
+                        content-type="application/json"
+                        handle-as="json"
+                        body='{
+                                "id_curso":{{id_curso}},
+                                "id_estudiante":{{id_estudiante}},
+                                "nota_obtenida": {{nota_obtenida}}
+                            }'
+                        debounce-duration="400"
+                        loading="{{cargando}}"
+                         >
+</iron-ajax>        
   </template>
 
   <script>
@@ -21,6 +54,9 @@
      
           
       },
+        actualizar:function(){
+            this.$.ajaxNota.generateRequest();
+        }
            
         
 

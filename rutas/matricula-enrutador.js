@@ -44,6 +44,8 @@ module.exports = (function() {
 							}
 						})
 			})
+			
+			//crear nueva ruta sin el ultimo slash y se agrega promedio
 	// matricular estudiante
 	enrutador.route('/servicios/matricula/').post(
 			function(req, res, next) {

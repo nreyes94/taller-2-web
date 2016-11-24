@@ -3,7 +3,10 @@
   "main": "component-app.html",
   "dependencies": {
     "polymer": "Polymer/polymer#^1.4.0",
-    "app-router": "^2.7.1"
+    "app-router": "^2.7.1",
+    "iron-input": "^1.0.10",
+    "iron-icon": "^1.0.12",
+    "iron-icons": "^1.2.0"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
